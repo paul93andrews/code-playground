@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Code-Wars Daily Challenges</title>
+</head>
+<body>
+<script>
+    // Your task is to convert strings to how they would be written by Jaden Smith.The strings are actual quotes from Jaden Smith, but they are not capitalized in the same way he originally typed them.
+
+    //         Example:
+
+    //     Not Jaden - Cased: "How can mirrors be real if our eyes aren't real"
+    //     Jaden - Cased: "How Can Mirrors Be Real If Our Eyes Aren't Real"
+
+    const jadenCased = (str) => {
+        const array = str.split(' ');
+        let finalArray = [];
+        for (word of array) {
+            const uppercaseArray = [...word];
+            let uppercaseLetter = uppercaseArray[0].toUpperCase();
+            uppercaseArray.shift();
+            uppercaseArray.unshift(uppercaseLetter);
+            const jadenCasedWord = uppercaseArray.join('');  
+            finalArray.push(jadenCasedWord);
+        }
+        const jadenCasedSentence = finalArray.join(' ');
+        return console.log(jadenCasedSentence);
+    }
+
+    jadenCased("How can mirrors be real if our eyes aren't real");
+
+
+    //Descending Order
+    // Your task is to make a function that can take any non - negative integer as a argument and return it with its digits in descending order.Essentially, rearrange the digits to create the highest possible number.
+    //         Examples:
+
+    //     Input: 21445 Output: 54421
+
+    //     Input: 145263 Output: 654321
+
+    //     Input: 1254859723 Output: 9875543221
+
+    const descendingOrder = number => {
+        if (typeof number != 'number') {
+            return console.log('put in a number ya fool!');
+        }
+
+        const numberStr = number.toString();
+        const numberArray = [...numberStr];
+        const sortedNumberArray = numberArray.sort();
+        let reverseSortedArray = [];
+        for (value of sortedNumberArray) {
+            reverseSortedArray.unshift(value);
+        }
+
+        reverseNumberStr = reverseSortedArray.join('');
+        const reverseNumber = Number(reverseNumberStr);
+        return reverseNumber;
+    }
+
+    descendingOrder(21445);
+    descendingOrder(123456789);
+    descendingOrder(1021);
+
+
+    //Isogram
+    
+    // An isogram is a word that has no repeating letters, consecutive or non - consecutive.Implement a function that determines whether a string that contains only letters is an isogram.Assume the empty string is an isogram.Ignore letter case.
+
+    //     isIsogram("Dermatoglyphics") == true
+    //     isIsogram("aba") == false
+    //     isIsogram("moOse") == false // -- ignore letter case
+
+    const isIsogram = str => {
+        const lowerCaseStr = str.toLowerCase();
+        const strArray = [...lowerCaseStr];
+        let letterCount = {};
+
+        for (letter of strArray) {
+            if (letterCount[letter] === undefined) {
+                letterCount[letter] = 1;
+            }
+            else {
+                letterCount[letter]++
+                return console.log(false);
+            }
+        }
+
+        return console.log(true);
+    }
+
+    isIsogram('the');
+    isIsogram('aba');
+    isIsogram('moOse');
+
+//   Funny string attachment  
+
+// This time no story, no theory. The examples below show you how to write function accum:
+
+// Examples:
+
+// accum("abcd") -> "A-Bb-Ccc-Dddd"
+// accum("RqaEzty") -> "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy"
+// accum("cwAt") -> "C-Ww-Aaa-Tttt"
+
+// The parameter of accum is a string which includes only letters from a..z and A..Z.
+
+    const strAccum = (str) => {
+        const upperStr = str.toUpperCase();
+        const strArray = [...upperStr];
+        let newArray = [];
+
+        for (let i = 0; i <= strArray.length - 1; i++) {
+            if (i === 0) {
+                const firstLetter = strArray[i];
+                newArray.push(firstLetter + '-');
+            }
+            else if(i > 0 && i < strArray.length - 1) {
+                newArray.push(strArray[i]);
+                let letter = strArray[i].toLowerCase() + '';
+                newArray.push(letter.repeat(i) + '-');
+            }
+            else if (i === strArray.length - 1) {
+                newArray.push(strArray[i]);
+                let letter = strArray[i].toLowerCase() + '';
+                newArray.push(letter.repeat(i));
+            }
+        }
+        const finalStr = newArray.join('');
+        return finalStr;
+    }
+
+    console.log(strAccum('abcd'));
+    console.log(strAccum('cwAT'));
+
+    const accum = (str) => {
+        const upperStr = str.toUpperCase();
+        const strArray = [...upperStr];
+        const newArray = strArray.map((letter, i) => {
+            return letter + letter.toLowerCase().repeat(i);
+        });
+        const finalStr = newArray.join('-');
+        return finalStr;
+    }
+
+    console.log(accum('abcd'));
+    console.log(accum('cwAT'));
+
+    // Given: an array containing hashes of names
+
+    //     Return: a string formatted as a list of names separated by commas except for the last two names, which should be separated by an ampersand.
+
+    //         Example:
+
+    //     list([{ name: 'Bart' }, { name: 'Lisa' }, { name: 'Maggie' }])
+    //     // returns 'Bart, Lisa & Maggie'
+
+    //     list([{ name: 'Bart' }, { name: 'Lisa' }])
+    //     // returns 'Bart & Lisa'
+
+    //     list([{ name: 'Bart' }])
+    //     // returns 'Bart'
+
+    //     list([])
+// returns ''
+
+    const arrayList = [{name: 'Bart'}, {name: 'Lisa'}, {name: 'Maggie'}];
+
+    const list = array => {
+            let newArray = [];
+            for (obj of array) {
+                newArray.push(obj.name);
+            }
+            const finalStr = newArray.map((name, i) => {
+                if ((newArray.length - 1) === 0) {
+                    return name;
+                }
+                else if (i === (newArray.length - 1)) {
+                    return '& ' + name;
+                }
+                else if (i === (newArray.length - 2)) {
+                    return name;
+                }
+                return name + ','
+            }).join(' ');
+            
+            return finalStr;
+    }
+
+    console.log(list(arrayList)); 
+
+</script>
+</body>
+</html>
