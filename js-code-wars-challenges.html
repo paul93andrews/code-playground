@@ -356,6 +356,49 @@
 
         return pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
     }
+
+    //Write a function that counts the letters of multiple string values in an array
+    //Then, return the letter count for each individual string as an object
+    //Each object's letter count will be stored in an array to be returned by the function
+
+    const countLetters = (array) => {
+        let obj = {};
+        let finalArray = [];
+
+        for (word of array) {
+            obj = {}
+            let strArray = [...word];
+            for (letter of strArray) {
+                if (obj[letter] === undefined) {
+                    obj[letter] = 1;
+                }
+                else {
+                    obj[letter]++
+                }
+            }
+            finalArray.push(obj);
+        }
+        return finalArray;
+    }
+
+    console.log(countLetters(['mmgdsdwqulhrinkatfjoyzxcbvq', 'megsdwpulhrinkasfjdyzxcbvk']));
+
+    const countLetters2 = array => {
+        return array.map(string => {
+            const obj = {};
+            [...string].map(letter => {
+                if (!obj[letter]) {
+                    obj[letter] = 1;
+                }
+                else {
+                    obj[letter]++;
+                }
+            })
+            return obj
+        })
+    }
+
+    console.log(countLetters2(['mmgdsdwqulhrinkatfjoyzxcbvq', 'megsdwpulhrinkasfjdyzxcbvk']));
 </script>
 </body>
 </html>
