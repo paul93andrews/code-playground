@@ -340,12 +340,12 @@
     console.log(humanReadable(359999));
     console.log(humanReadable(45296));
 
-    humanReadable = (seconds) => {
+    const humanReadable2 = (time) => {
         //very interesting solution here
         //parseInt() will drop the decimal values on the number when converting to string
-        const hours = parseInt(seconds / 3600);
-        const minutes = parseInt(seconds / 60) % 60;
-        const seconds = seconds % 60;
+        const hours = parseInt(time / 3600);
+        const minutes = parseInt(time / 60) % 60;
+        const seconds = time % 60;
         //that gives us all of the values we needs
 
         const pad = (val) => {
@@ -399,6 +399,38 @@
     }
 
     console.log(countLetters2(['mmgdsdwqulhrinkatfjoyzxcbvq', 'megsdwpulhrinkasfjdyzxcbvk']));
+
+    //Find Int
+    
+    // Given an array, find the int that appears an odd number of times.
+
+    //     There will always be only one integer that appears an odd number of times.
+
+    const findOdd = (array) => {
+        const obj = {}
+        array.map(number => {
+            if (!obj[number]) {
+                obj[number] = 1;
+            }
+            else {
+                obj[number]++;
+            }
+        })
+        for (key in obj) {
+            if (obj[key] % 2 !== 0) {
+                return Number(key);
+            }
+        }
+    }
+    
+
+    console.log(findOdd([20, 1, 1, 2, 2, 3, 3, 5, 5, 4, 20, 4, 5]));
+
+    const findOdd2 = (xs) => xs.reduce((a, b) => a ^ b);
+
+    console.log(findOdd2([20, 1, 1, 2, 2, 3, 3, 5, 5, 4, 20, 4, 5]));
+
+    console.log([ 1, 1, 2, 7, 2, 3, 3].reduce((a,b) => a ^ b));
 </script>
 </body>
 </html>
