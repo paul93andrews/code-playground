@@ -431,6 +431,105 @@
     console.log(findOdd2([20, 1, 1, 2, 2, 3, 3, 5, 5, 4, 20, 4, 5]));
 
     console.log([ 1, 1, 2, 7, 2, 3, 3].reduce((a,b) => a ^ b));
+
+
+    // A Narcissistic Number is a number which is the sum of its own digits, each raised to the power of the number of digits in a given base.In this Kata, we will restrict ourselves to decimal(base 10).
+
+//     For example, take 153(3 digits):
+
+//     1 ^ 3 + 5 ^ 3 + 3 ^ 3 = 1 + 125 + 27 = 153
+
+//     and 1634(4 digits):
+
+//     1 ^ 4 + 6 ^ 4 + 3 ^ 4 + 4 ^ 4 = 1 + 1296 + 81 + 256 = 1634
+
+//     The Challenge:
+
+//     Your code must return true or false depending upon whether the given number is a Narcissistic number in base 10.
+
+//     Error checking for text strings or other invalid inputs is not required, only valid integers will be passed into the function.
+
+    const narcissistic = num => {
+        const numStr = `${num}`
+        const numArray = [...numStr];
+        const length = numArray.length;
+
+        const finalSum = numArray
+        .map(number =>  number ** length)
+        .reduce((a,b) => a + b);
+
+        if (finalSum === num) return true;
+        else return false;
+    }
+
+    console.log(narcissistic(7));
+    console.log(narcissistic(371));
+
+    // Three conditions must be met for a valid experiment:
+
+    //         Float parameter "h" in meters must be greater than 0
+    //     Float parameter "bounce" must be greater than 0 and less than 1
+    //     Float parameter "window" must be less than h.
+
+    //     If all three conditions above are fulfilled, return a positive integer, otherwise return -1.
+    //     Note:
+
+    //     The ball can only be seen if the height of the rebounding ball is strictly greater than the window parameter.
+
+    const bouncingBalls = (h, b, w) => {
+        const height = h > 0;
+        const bounce = b < 1 && b > 0;
+        const windowHeight = w < h;
+
+        if (height && bounce && windowHeight) {
+            let count = 1;
+            let bounceHeight = b * h;
+
+            for (i = bounceHeight; i > w; i *= b) {
+                count = count + 2;
+            }
+            return count;
+        }
+        else return -1;
+    }
+
+    console.log(bouncingBalls(3, .66, 1.5));
+    console.log(bouncingBalls(30, .66, 1.5));
+
+    // Complete the method / function so that it converts dash / underscore delimited words into camel casing.The first word within the output should be capitalized only if the original word was capitalized(known as Upper Camel Case, also often referred to as Pascal case).
+    //         Examples
+
+    //     toCamelCase("the-stealth-warrior") // returns "theStealthWarrior"
+
+    //     toCamelCase("The_Stealth_Warrior") // returns "TheStealthWarrior"
+
+    const toCamelCase = (str) => {
+        if (str === '') return 
+        
+        const strArray = str.split(/[-_]+/g);
+        
+        const newArray = strArray.map(word => {
+            if (word === strArray[0] && strArray[0] === strArray[0].toLowerCase()) {
+                return word.replace(word[0], word[0].toLowerCase())
+            }
+            else {
+                return word.replace(word[0], word[0].toUpperCase());
+            }
+        })  
+        return newArray.join('');
+    }
+
+
+    const toCamelCase = (str) => {
+        const regExp = /[-_]\w/ig;
+        return str.replace(regExp, (match) => {
+            return match.charAt(1).toUpperCase();
+        });
+    }
+
+    console.log(toCamelCase('the-stealth-warrior'));
+    console.log(toCamelCase("The_Stealth_Warrior"));
+
 </script>
 </body>
 </html>
