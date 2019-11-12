@@ -503,21 +503,21 @@
 
     //     toCamelCase("The_Stealth_Warrior") // returns "TheStealthWarrior"
 
-    const toCamelCase = (str) => {
-        if (str === '') return 
+    // const toCamelCase = (str) => {
+    //     if (str === '') return 
         
-        const strArray = str.split(/[-_]+/g);
+    //     const strArray = str.split(/[-_]+/g);
         
-        const newArray = strArray.map(word => {
-            if (word === strArray[0] && strArray[0] === strArray[0].toLowerCase()) {
-                return word.replace(word[0], word[0].toLowerCase())
-            }
-            else {
-                return word.replace(word[0], word[0].toUpperCase());
-            }
-        })  
-        return newArray.join('');
-    }
+    //     const newArray = strArray.map(word => {
+    //         if (word === strArray[0] && strArray[0] === strArray[0].toLowerCase()) {
+    //             return word.replace(word[0], word[0].toLowerCase())
+    //         }
+    //         else {
+    //             return word.replace(word[0], word[0].toUpperCase());
+    //         }
+    //     })  
+    //     return newArray.join('');
+    // }
 
 
     const toCamelCase = (str) => {
@@ -529,6 +529,35 @@
 
     console.log(toCamelCase('the-stealth-warrior'));
     console.log(toCamelCase("The_Stealth_Warrior"));
+
+    // Write a function that accepts an array of 10 integers(between 0 and 9), that returns a string of those numbers in the form of a phone number.
+    //         Example:
+
+    //     createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) // => returns "(123) 456-7890"
+
+    //     The returned format must be correct in order to complete this challenge.
+    //         Don't forget the space after the closing parenthesis!
+
+    const createPhoneNumber = (array) => {
+        return array.map((number, index) => {
+            if (index === 0){
+                return `(${number}`;
+            }
+            if (index === 2) {
+                return `${number})`;
+            }
+            if (index === 3) {
+                return ` ${number}`
+            }
+            if (index === 5) {
+                return `${number}-`
+            }
+            return number;
+        }).join('');
+    }
+
+    console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]));
+
 
 </script>
 </body>
