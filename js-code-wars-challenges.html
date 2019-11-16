@@ -558,6 +558,67 @@
 
     console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]));
 
+    // The marketing team is spending way too much time typing in hashtags.
+    //         Let's help them with our own Hashtag Generator!
+
+    //     Here's the deal:
+
+    //     It must start with a hashtag(#).
+    //     All words must have their first letter capitalized.
+    //     If the final result is longer than 140 chars it must return false.
+    //     If the input or the result is an empty string it must return false.
+
+    const generateHashtag = (str) => {
+        if (str === '') return false;
+        if (str.length >= 140) return false;
+        const strArray = str.split(' ');
+        strArray.unshift('#')
+        let newArray = [];
+        for (word of strArray) {
+            if (word != '') {
+                const lowerCase = word.charAt(0);
+                const upperCase = word.charAt(0).toUpperCase();
+                const newWord = word.replace(lowerCase, upperCase);
+                newArray.push(newWord);
+            }
+        }
+        const finalStr = newArray.join('');
+        return finalStr;
+    }
+
+    console.log(generateHashtag('hello        World'));
+    console.log(generateHashtag(' Hello there thanks for trying my Kata'));
+
+    // ROT13 is a simple letter substitution cipher that replaces a letter with the letter 13 letters after it in the alphabet.ROT13 is an example of the Caesar cipher.
+
+    //     Create a function that takes a string and returns the string ciphered with Rot13.If there are numbers or special characters included in the string, they should be returned as they are.Only letters from the latin / english alphabet should be shifted, like in the original Rot13 "implementation".
+
+    const rot13 = (str) => {
+        const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k','l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+        const strArray = [...str];
+        const regex = /[\W\d0\s]/g;
+        return strArray.map((letter, index) => {
+            if (regex.test(letter)){
+                console.log(regex.test(letter));
+                return letter;
+            }
+            else if (letter === letter.toUpperCase()){
+                return checkLetterPosition(alphabet, letter).toUpperCase();
+            }
+            else return checkLetterPosition(alphabet, letter);
+        }).join('');
+    }
+
+    const checkLetterPosition = (arr, letter) => {
+        return (arr.indexOf(letter.toLowerCase()) > 12)
+        ?
+        arr[12 - ((arr.length - 1) - arr.indexOf(letter.toLowerCase()))]
+        :
+        arr[arr.indexOf(letter.toLowerCase()) + 13]
+    }
+
+    console.log(rot13('Grfg'));
+    console.log(rot13(' 10+2 is twelve.'));
 
 </script>
 </body>
