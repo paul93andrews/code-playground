@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Level two extra Javascript exercises are completed below -->
+    <script>
+    // finding duplicate strings in two arrays
+        const animals = ['cow', 'deer', 'goat', 'pig', 'chicken', 'fish']
+        const meats = ['beef', 'pork', 'chicken', 'fish'];
+
+        stringsInCommon = (one, two) => {
+            // combining both arrays into one 
+            let newArray = one.concat(...two);
+            console.log(newArray);
+            
+            const object = {};
+            const result = [];
+
+            newArray.forEach((item) =>  {
+                // running a forEach loop so that the items are checked in the array 
+                if (!object[item])
+                    object[item] = 0;
+                object[item] += 1;
+            })
+
+            for (const prop in object) {
+                // below is saying that if the prop exists twice or more in the object, then it duplicates and we want that to be pushed to the result array to be displayed
+                if (object[prop] >= 2) {
+                    result.push(prop);
+                }
+            }
+
+            console.log(result);
+            
+        }
+        stringsInCommon(animals, meats);
+
+        // answer key version
+        const stringsInCommon2 = (firstArr, secondArr) => {
+                const common = [];
+                // below I am using a ternary operator. It\'s like an if statement but in just one line! treat the "?" like the word if and the ":" as else.
+                let longerArr = firstArr >= secondArr ? firstArr : secondArr; // is the firstArr greater than or equal to the second ? if so give me the firstArr, : else (if not) then give me the secondArr
+                let shorterArr = firstArr <= secondArr ? firstArr : secondArr;
+                //what happens here is that the longerArray is getting mapped over. When the map method gets to each item, it compares to see if the item exists in an index of the shorterArray, that is, if the index number is >=0. It then pushes that item into the new array and we return that when calling the function
+                longerArr.map((item) => {
+                    if (shorterArr.indexOf(item) >= 0) {
+                        common.push(item);
+                    }
+                });
+                console.log(common);
+            }
+            stringsInCommon2(animals,meats);
+
+        // finding factors of a number and pushing them to an array 
+            // the function below creates an array with the number of places that the is the parameter number + 1 that the use sets. The keys() sets each of them as counting from 1-number+1. Filter then loops through each of the places and creates a modified array of only the values that are factors of the number, that is that divide into whole numbers with no remainder.
+            const factors = number => [...Array(number + 1).keys()].filter(i => number % i === 0);
+            
+
+            console.log(factors(42));
+
+            // answer key version
+            // function defined below takes the number and checks for its factors based on the number parameter passed in. In this case it will be the total tallies of the number passed in from 1-number.
+            const isFactor = (number, factorToCheck) => {
+                    if (number <= 0) {
+                        return;
+                    }
+                    if (number % factorToCheck === 0) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                
+                const getFactors = (number) => {
+                    const factors2 = [];
+                    //use a for loop that is equal to the number that user passes in. The for loop counts backwards from the number down to 0 and runs the isFactor function to check each number less than the number user passed in whether it is a factor. It then pushes the numbers that are returned true in the isFactor function to the factors array
+                    for (let i = number; i >= 0; i--) {
+                        if (isFactor(number, i)) {
+                            factors2.push(i);
+                        }
+                    }
+                    return factors2;
+                    console.log(factors2);
+                }
+
+                getFactors(30);
+        // [1,2,3,5,6,10,15,30]
+
+        // Palindrome or not ?
+
+        isPalindrome = (string) => {
+            //take the string passed into the function and manipulate it so that it's all capitalized and any white space has been removed. This is to account of differences in spacing and letter casing
+            let newString = string.toUpperCase().replace(/ +/g, "");
+
+            //this process will take the string that's passed in and modify it so it's reversed. Process is done by spreading the string into an array, for the array to be reversed and then joined again into a string, which is made to caps and white spaces removed
+            let array = [...string];
+            array.reverse();
+            let reverseString = `${array.join('')}`;
+            reverseString = reverseString.toUpperCase().replace(/ +/g, "");
+            console.log(reverseString);
+
+            if (newString == reverseString) return true;
+            else return false;
+        }
+
+        console.log(isPalindrome("avid diva"));
+        console.log(isPalindrome("I really love palindromes."));
+        console.log(isPalindrome("Madam im adam"));
+        console.log(isPalindrome("I'm a livid imp."));
+
+        // Fibonacci sequence
+        fibonacci = (number) =>  {
+            //bindings where values will be stored. arrayOfNums is where the calculating current plus initial values will take place
+            let arrayOfNums = [];
+            //this is where the summed values and so the fibonacci values will be stored and then returned
+            let fibonacciArray = [];
+            //this is the accumulating value that will be pushed into arrayOfNums to be added to current value
+            let evolvingValue = '';
+            //we run the loop until the fibonacciArray.length +1 is equal to or less than the number parameter. This is so because the for loop adds two values in one loop when i == 1, so we account for that by adding 1 to the length of the array, in effect reducing the length of the loop by one loop
+            for (let i = 0; (fibonacciArray.length + 1) <= number; i++) {
+                //the first value in a fibonacci sequence is always 0 so we push it to both arrays
+                if (i == 0) {
+                    arrayOfNums.push(0);
+                    fibonacciArray.push(0)
+                }
+                //the second and third values are always 1 and 1, so we push the first value 1 and then add the accumulated value of 0 + 1 = 1 to the fibonacci sequence as well
+                else if (i == 1) {
+                    arrayOfNums.push(1);
+                    fibonacciArray.push(1);
+                    //the evolving value is calculated by the array's reduce method that adds initial value to the current value in the array
+                    evolvingValue = arrayOfNums.reduce((a,b) => a + b, 0);
+                    fibonacciArray.push(evolvingValue);
+                }
+                //for values greater than 1, we remove the first value of the arrayOfNums to maintain the only two values we need to calculate to update our evolving value. Then, we push that evolving value to the fibonacci array and we use that value in the next loop
+                else if (i > 1) {
+                    arrayOfNums.shift();
+                    arrayOfNums.push(evolvingValue);
+                    evolvingValue = arrayOfNums.reduce((a,b) => a + b);
+                    fibonacciArray.push(evolvingValue);
+                }
+            }
+            return fibonacciArray;
+        }
+
+        console.log(fibonacci(11));
+
+
+        // Number reverser
+
+        // Write a function that takes in a number and reverses it.
+
+        // Example(s):
+
+        // reverseNumber(32243)
+        // >> 34223
+
+        reverseNumber = (number) => {
+            if(typeof number === 'number') {
+                const stringNumber = number.toString();
+                let numberArray = [...stringNumber];
+                numberArray.reverse();
+                numberArray = numberArray.join('');
+                
+                const reversedNumber = Number(numberArray);
+                return (console.log(reversedNumber));
+            }
+            else {
+                return (console.log(`${number} is not a data type number`));
+            }
+        }
+
+        reverseNumber(32243);
+        reverseNumber(445435245236633);
+        reverseNumber('why hello there!');
+
+
+//         A case of titles
+
+//             Create a function that takes a string as a parameter and converts the first letter of each word of the string in upper case.
+
+//             Bonus: Appropriately ignore all articles(a, the), prepositions(to, at, in, with), and coordinating conjunctions(and, but, or) as commonly left uncapitalized in titles.
+
+//                 Example(s):
+
+//             titleCase('the quick brown fox'); 
+//           >> The Quick Brown Fox
+
+        titleCase = (string) => {
+            const array = string.split('');
+            let regex = /a|t|u|w|b|o|i/i
+            // console.log(regex.test('Why'));
+            for (letters in array) {
+                if (letters == 0) {
+                    array[letters] = array[letters].toUpperCase()
+                }
+                else if (array[letters] == ' ') {
+                    let nextLetter = (Number(letters) + 1);
+                    array[nextLetter] = array[nextLetter].toUpperCase()
+                    if (regex.test(array[nextLetter]) && (array[nextLetter + 1] == ' ' || array[nextLetter + 2] != ' ' || array[nextLetter + 3] != ' ' || array[nextLetter + 4] != ' ')) {
+                        array[nextLetter] = array[nextLetter].toLowerCase()
+                    }
+                }
+            }
+            const newString = array.join('');
+            return (console.log(newString));
+        }
+
+        const titleCase2 = (str) => {
+            let titleArr = str.split(" ");
+            const titled = titleArr.map((word) => {
+                if (word != 'but' && word != 'and' && word != 'with' && word != 'an' && word != 'to' && word != 'a' && word != 'or') {
+                    let wordArray = word.split('');
+                    wordArray.splice(0, 1, wordArray[0].toUpperCase());
+                    return wordArray.join('');
+                } else {
+                    return word;
+                }
+            });
+            const finalString = titled.join(' ');
+            return console.log(finalString);
+        }
+
+        // titleCase('hello there');
+        // titleCase('the quick brown fox');
+        // titleCase(`i'm working on the night train`);
+        titleCase('this is a sentence with no if ands or buts');
+        titleCase2('this is a sentence with no if ands or buts');
+
+        // titleCase('what a wonderful world this would be if i could only do what is needed')
+
+
+        // First non - repeated character
+
+        //     Write a JavaScript function to find the first not repeated character.Go to the editor
+
+        //     getFirstUniqueChar('abacddbec')
+        //         >> 'e'
+
+        getFirstUniqueChar = (str) => {
+            let obj = {};
+            let newStr = str.toLowerCase();
+            let stringArray = [...newStr];
+            let uniqueChar = [];
+            for (letters in stringArray) {
+                if (!obj[stringArray[letters]]) {
+                    obj[stringArray[letters]] = 1;
+                }
+                else {
+                    obj[stringArray[letters]]++
+                }
+            }
+            for (letters in obj) {
+                if (obj[letters] == 1) {
+                    uniqueChar.push(letters);
+                }
+            }
+            return console.log(uniqueChar[0]);
+        }
+
+        getFirstUniqueChar('abacddFFbec'); // e
+        getFirstUniqueChar('yuyuyuhnhnhikokolplp'); // i
+        getFirstUniqueChar('wwjiinnf'); // j
+
+//         Is it prime ?
+
+//                 Write a JavaScript function that takes a number as a parameter and checks whether the number is prime or not.
+
+//                     Hint: A prime number is one that has no other positive factors between one and itself.So 5 is a prime number(it doesn't divide by 2, 3, or 4), but 18 isn't(it divides by 2, 3, 6, and 9).
+
+//                         Example(s):
+
+//                         isPrime(47); >> true
+//                      isPrime(30); >> false
+//             isPrime(1); >> true
+        isPrime = (number) => {
+            if (number == 1) {
+                return console.log(false);
+            }
+            for (i = 2; i <= number; i++) {
+                if (i == number) {
+                    return console.log(true); 
+                }
+                else if (i != number && (number % i) == 0) {
+                    return console.log(false);;
+                }
+            }
+        }
+
+        isPrime(47);
+        isPrime(30);
+        isPrime(2);
+        isPrime(7);
+        isPrime(89);
+        isPrime(1);
+
+//      Vowel count redux
+
+        // Create a function that counts the number of vowels within a string. It should handle both capitalized and uncapitalized vowels.
+
+        // Unlike the previous vowel function, this one should count all occurences of the letter 'Y' that would qualify as a vowel — ie, those at the end of a word.
+
+        // Example(s):
+
+        // countVowels('The brown fox quickly ate more honey.'); 
+        // >> 13
+        // countVowels('whrrmyvwlst')
+        // >> 0
+        // countVowels('AeIOuy'); 
+        // >> 6
+
+        countVowels = (string) => {
+            let vowelCount = 0;
+            let array = [...string];
+            let regex = /a|e|i|o|u/i;
+
+            for (letter in array) {
+                if (array[letter] == 'y' && array[Number(letter) + 1] == ' ') {
+                    vowelCount++;
+                }
+                else if (array[letter] == 'y' && array[Number(letter) + 1] == '.') {
+                    vowelCount++;                    
+                }
+                else if (array[letter] == 'y' && letter == array.length - 1) {
+                    vowelCount++;
+                }
+            }
+
+            array.forEach(letter => {
+                if (regex.test(letter)) {
+                    vowelCount++;
+                }
+            })
+            return console.log(vowelCount);
+        }
+
+        countVowels('The brown fox quickly ate more honey.');
+        countVowels('whrrmyvwlst');
+        countVowels('AeIOuy');
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Level Three JavaScript Exercises</title>
+</head>
+<body>
+
+<script>
+    // Count letters
+
+    //     Write a function to get the number of occurrences of all the letters in specified string.Case should be ignored — ie, H and h should be treated as the same letter.Do not count punctuation or numbers.
+
+    //     Output can be a string, an object, or multiple output lines.
+
+    //         Example(s):
+
+    //     countLetters('Hello, world!'); 
+    //     >> H: 1
+    //     >> E: 1
+    //     >> L: 3
+    //     >> O: 2
+    //     >> W: 1
+    //     >> R: 1
+    //     >> D: 1
+
+    const countLetters = (str) => {
+        const strCaps = str.toUpperCase();
+        const regex = /[0-9]+/gi;
+        const newStr = strCaps.replace(regex, '');
+        const strArray = [...newStr];
+        const omittedChars = ['!', ',', '.', ':', ';', '?', "'", " "];
+        let countObj = {};
+
+        for (letter in strArray) {
+            if (countObj[strArray[letter]] === undefined && omittedChars.indexOf(strArray[letter]) < 0) {
+                countObj[strArray[letter]] = 1;
+            }
+            else if (omittedChars.indexOf(strArray[letter]) < 0) {
+                countObj[strArray[letter]]++;
+            }
+        }
+        console.log(countObj);
+    }
+
+    countLetters('Hello, world55!');
+    countLetters('Paul Andrews');
+    countLetters('Eifell 65, and the band The Monkees, are similar!!');
+
+//     Is email ?
+
+//             Write a function that takes in a string, and verfies that it could possibly be a valid email based on common assumptions of what an email should look like.
+
+//                 Example(s):
+
+//         isEmail('john.smith@example.com'); 
+//             >> true
+//         isEmail('This isn't an email.'); 
+//             >> false
+        // isEmail('drewthedestroyer+ponies@minns.co.uk'); 
+        //     >> true
+//         isEmail('drewthedestroyer+ponies@$!'); 
+//             >> false
+
+    const verifyEmail = (str) => {
+        const whitespace = /\s/;
+        const charAfterSymbol = /@(?=[a-z])/
+
+        if (whitespace.test(str)) {
+            return console.log(false);
+        }
+        else if (charAfterSymbol.test(str)) {
+            return console.log(true);
+        }
+        return console.log(false);
+    }
+
+    verifyEmail('paulandrews810@gmail.com');
+    verifyEmail('drewthedestroyer+ponies@minns.co.uk');
+    verifyEmail('drewthedestroyer+ponies@$!');
+    verifyEmail('john.smith@example.com');
+    verifyEmail(`This isn't an email.`); 
+
+    // Unique characters
+
+    //     Write a function that takes in a string, and returns all the unique characters found in that string.
+
+    //         Example(s):
+
+    //     getAllUniques("thequickbrownfoxjumpsoverthelazydog")
+    //         >> "thequickbrownfxjmpsvlazydg"
+
+    const uniqueChars = (str) => {
+        const strLowerCase = str.toLowerCase();
+        const whitespace = /\s/;
+        const finalStr = strLowerCase.replace(whitespace, '');
+        const lettersArray = [...finalStr];
+        let uniqueStr = ''
+
+        for (letter in lettersArray) {
+            if (uniqueStr.indexOf(lettersArray[letter]) < 0) {
+                uniqueStr += lettersArray[letter];
+            }
+        }
+
+        console.log(uniqueStr);
+    }
+
+    uniqueChars('wally world');
+    uniqueChars("thequickbrownfoxjumpsoverthelazydog");
+
+//     Pig latin
+
+//         Write a function that takes in a sentence, and returns that sentence in Pig Latin.
+
+//         Pig Latin is a constructed play language common with children in which the first consonant or consonant cluster of each word in a sentence is moved to the end of the word, and then additionally has the suffix 'ay' added to it.
+
+//         If a word starts with a vowel, you wouldn't move anything to the end, but rather, the suffix added would be 'way' rather than 'ay'.
+
+//         For example, 'milk' in pig latin would be 'ilkmay', while 'banana' would be 'ananabay'.Vowel - forward words like 'egg' and 'apple' would yield 'eggway' and 'appleway', respectively.
+
+//         Handle capitalization appropriately as you feel like it, but make sure you handle it in some way!
+
+//         Example(s):
+
+//         pigLatin('Hello, world!'); 
+// >> "Ellohay, orldway!"
+//         pigLatin('My very educated mother just served us noodles.')
+//             >> "Ymay eryvay educatedway othermay ustjay ervedsay usway oodlesnay."
+
+    const convertToPigLatin = (str) => {
+        let strArray = str.split(' ');
+        const regex = /\W/;
+        const vowelRegex = /[aeiou]/i;
+        let finalArray = [];
+
+        for (words in strArray) {
+            let word = strArray[words];
+            if (vowelRegex.test(word[0])) {
+                word += 'way';
+                finalArray.push(word);
+            } 
+            else if (!vowelRegex.test(word[0])) {
+                let tempWord;
+                let finalWord;
+                if (regex.test(word[(word.length - 1)])) {
+                    const punctuation = word[word.length - 1];
+                    tempWord = word.replace(word[word.length - 1], word[0]);
+                    tempWord += `ay${punctuation}`;
+                    finalWord = tempWord.replace(word[0], '');
+                    finalArray.push(finalWord);
+                }
+                else { 
+                    let consonantWord = [...word];
+                    let firstLetter = consonantWord.shift().toLowerCase();
+                    consonantWord.push(firstLetter + 'ay');
+                    let finalConsonantWord = consonantWord.join('');
+                    finalArray.push(finalConsonantWord);
+                }
+            }
+        }
+        let newStr = finalArray.join(' ');
+        return console.log(newStr);
+    }
+
+    convertToPigLatin('hello, world!');
+    convertToPigLatin('My very educated mother just served us noodles.');
+
+</script>
+</body>
+</html>
