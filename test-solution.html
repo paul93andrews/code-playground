@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/7bc83db579.js"></script>
+    <title>Testing Solutions</title>
+
+</head>
+<style>
+    .box-container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 5fr 5fr;
+        grid-template-rows: 200px 200px;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+        font-size: 30px;
+        align-self: center;
+    }
+
+    @media (max-width: 500px) {
+        a {
+            font-size: 20px;
+        }
+    }
+
+    i {
+        margin-left: 10px;
+    }
+
+    div {
+        border: 3px solid;
+    }
+
+    .box {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    h1 {
+        margin: 0;
+        text-align: center;
+    }
+
+    .one {
+        border-color: red;
+        grid-row: 2;
+    }
+
+    .two {
+        border-color: green;
+    }
+
+    .three {
+        border-color: tomato;
+        grid-row: 2;
+    }
+
+    .four {
+        border-color: blue;
+    }
+
+</style>
+<body>
+    <div class="box-container">
+        <div class="box one">
+            <h1>One</h1>
+            <a href="#">Read Article</a>
+        </div>
+        <div class="box two">
+            <h1>Two</h1>
+            <a href="#">Read Flipbook</a>
+        </div>
+        <div class="box three">
+            <h1>Three</h1>
+            <a href="#">Read Article</a>
+        </div>
+        <div class="box four">
+            <h1>Four</h1>
+            <a href="#">Read Flipbook</a>
+        </div>
+    </div>
+<script>
+const tileLink = document.querySelectorAll('a');
+const icon = `<i class="fas fa-arrow-circle-down"></i>`;
+const linksArray = [...tileLink];
+
+console.log(linksArray);
+
+const appendIcon = () => {
+    tileLink.forEach(link => {
+        link.innerHTML += icon;
+    })
+}
+
+window.onload = appendIcon;
+
+</script>
+</body>
+</html>
