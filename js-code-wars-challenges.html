@@ -707,6 +707,7 @@
     console.log(isArray([[1, 4], 3, 4], [[1, 5], 4, 92]));
     console.log(isArray([[], []], [1, []]));
 
+
     //TOTAL MINUTES
     // Return the number of minutes between two dates
 
@@ -725,6 +726,7 @@
     console.log(totalMinutes(new Date(2005, 11, 12), new Date(2006, 11, 12)));
     console.log(totalMinutes(new Date(2019, 11, 12), new Date(1993, 11, 12)));
 
+
     //CONVENIENCE STORE
     //Return a boolean if the amount of change in your pocket is enough to cover the cost of the item
     const convenienceChange = (change, cost) => {
@@ -741,6 +743,69 @@
 
     console.log(convenienceChange([4, 2, 2, 0], 0));
     console.log(convenienceChange([8, 40, 9, 0], 3));
+
+//     Barbecue Skewers
+
+//         You are in charge of the barbecue grill.A vegetarian skewer is a skewer that has only vegetables(-o).A non - vegetarian skewer is a skewer with at least one piece of meat(-x).
+
+//         For example, the grill below has 4 non - vegetarian skewers and 1 vegetarian skewer(the one in the middle).
+
+//             ["--xo--x--ox--",
+//             "--xx--x--xx--",
+//             "--oo--o--oo--",
+//             "--xx--x--ox--",
+//             "--xx--x--ox--"]
+
+//         Given a BBQ grill, write a function that returns[# vegetarian skewers, # non - vegarian skewers].For example above, the function should return [1, 4].
+//             Examples
+
+//          bbqSkewers([
+//             "--oooo-ooo--",
+//             "--xx--x--xx--",
+//             "--o---o--oo--",
+//             "--xx--x--ox--",
+//             "--xx--x--ox--"
+//          ]) ➞[2, 3]
+
+//          bbqSkewers([
+//             "--oooo-ooo--",
+//             "--xxxxxxxx--",
+//             "--o---",
+//             "-o-----o---x--",
+//             "--o---o-----"
+//          ]) ➞[3, 2]
+
+    const bbqSkewers = (arr) => { 
+        let countArr = [0, 0];
+        arr
+        .forEach(skewer => {
+            if(skewer.indexOf('x') === -1) {
+                return countArr[0]++;
+                }
+            else {
+                return countArr[1]++;
+                }
+            }
+        )
+        return countArr;
+    }
+
+    console.log(
+        bbqSkewers([
+            "--oooo-ooo--",
+            "--xx--x--xx--",
+            "--o---o--oo--",
+            "--xx--x--ox--",
+            "--xx--x--ox--"
+        ])
+    );
+    console.log(bbqSkewers(
+            ["--oooo-ooo--",
+                "--ooooooo--",
+                "--o---",
+                "-o-----o---x--",
+                "--o-oooo-----"]
+        ));
 </script>
 </body>
 </html>
