@@ -806,6 +806,69 @@
                 "-o-----o---x--",
                 "--o-oooo-----"]
         ));
+
+    // Return the Objects Keys and Values
+
+    // Create a function that takes an object and returns the keys and values as separate arrays.
+    // Examples
+
+    // keysAndValues({ a: 1, b: 2, c: 3 })
+    // ➞ [["a", "b", "c"], [1, 2, 3]]
+
+    // keysAndValues({ a: "Apple", b: "Microsoft", c: "Google" })
+    // ➞ [["a", "b", "c"], ["Apple", "Microsoft", "Google"]]
+
+    // keysAndValues({ key1: true, key2: false, key3: undefined })
+    // ➞ [["key1", "key2", "key3"], [true, false, undefined]]
+
+    const keysAndValues = (obj) => {
+        return [Object.keys(obj), Object.values(obj)];
+    }
+
+    console.log(keysAndValues({a:1, b:2, c:3}));
+    console.log(keysAndValues({ a: "Apple", b: "Microsoft", c: "Google" }));
+
+    // Xs and Os, Nobody Knows
+
+    //     Create a function that takes a string, checks if it has the same number of x's and o's and returns either true or false.
+
+    //     Return a boolean value(true or false).
+    //     The string can contain any character.
+    //     When no x and no o are in the string, return true.
+
+    //         Examples
+
+    //     XO("ooxx") ➞ true
+
+    //     XO("xooxx") ➞ false
+
+    //     XO("ooxXm") ➞ true
+    //     // Case insensitive.
+
+    //     XO("zpzpzpp") ➞ true
+    //     // Returns true if no x and o.
+
+    //     XO("zzoo") ➞ false
+
+    //     Notes
+
+    //     Remember to return true if there aren't any x's or o's.
+    //     Must be case insensitive.
+
+    const XO = (str) => {
+        const countObj = {};
+        [...str.toLowerCase()].forEach(letter => {
+            if (letter === 'x' || letter === 'o') {
+                countObj[letter] ? countObj[letter]++ : countObj[letter] = 1;
+            }
+        })
+        return countObj.x === countObj.o ? true : false;
+    }
+
+    console.log(XO('xxoo'));
+    console.log(XO("zzoo"));
+    console.log(XO("zpzpzpp"));
+    console.log(XO("ooxXm"));
 </script>
 </body>
 </html>
