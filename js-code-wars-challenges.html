@@ -869,6 +869,75 @@
     console.log(XO("zzoo"));
     console.log(XO("zpzpzpp"));
     console.log(XO("ooxXm"));
+
+    const hackerSpeak = (str) => {
+        return str.split('').map(letter => {
+            if (letter === 'a') {
+                return '4';
+            } else if (letter === 'e') {
+                return '3';
+            } else if (letter === 'i') {
+                return '1';
+            } else if (letter === 'o') {
+                return '0';
+            } else if (letter === 's') {
+                return '5';
+            } else return letter;
+        }).join('');
+    }
+
+    console.log(hackerSpeak('javascript is cool'));
+
+    const convertToArray = (obj) => {
+        const array = []
+        for (item in obj) {
+            array.push([item, obj[item]])
+        }
+        return array;
+    }
+
+    console.log(convertToArray({ a: 1, b: 2 }));
+    console.log(convertToArray({ shrimp: 15, tots: 12 }));
+
+    const linesAreParallel = (arr1, arr2) => {
+        return arr1[1] / arr1[0] === arr2[1] / arr2[0] ? true : false;
+    }
+    
+    console.log(linesAreParallel([2, 4, 6], [4, 8, 12]));
+    console.log(linesAreParallel([2, 4, 1], [4, 2, 1]));
+
+    // The Museum of Incredibly DULL Things
+
+    //     A museum wants to get rid of some exhibitions.Katya, the interior architect, comes up with a plan to remove the most boring exhibitions.She gives them a rating, and removes the one with the lowest rating.Just as she finishes rating the exhibitions, she's called off to an important meeting. She asks you to write a program that tells her the ratings of the items after the lowest one is removed.
+
+    //     Create a function that takes an array of integers and removes the smallest value.
+    //         Examples
+
+    //     removeSmallest([1, 2, 3, 4, 5]) ➞[2, 3, 4, 5]
+
+    //     removeSmallest([5, 3, 2, 1, 4]) ➞[5, 3, 2, 4]
+
+    //     removeSmallest([2, 2, 1, 2, 1]) ➞[2, 2, 2, 1]
+
+    //     Notes
+
+    //     Don't change the order of the left over items.
+    //     If you get an empty array, return an empty array: []➞[].
+    //     If there are multiple items with the same value, remove item with lower index(3rd example).
+
+    const removeSmallest = (arr) => {
+        const junkArr = []
+        return arr.filter(number => {
+            if (number === 1 && junkArr.length === 0) {
+                junkArr.push(number);
+            } else {
+                return number
+            }
+        })
+    }
+
+    console.log(removeSmallest([2, 2, 1, 2, 1]));
+    console.log(removeSmallest([5, 3, 2, 1, 4]));
 </script>
 </body>
 </html>
