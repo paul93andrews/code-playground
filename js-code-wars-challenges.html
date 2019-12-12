@@ -1087,6 +1087,143 @@
         console.log(getTotalPrice(groceries));
         console.log(getTotalPrice(groceries2));
         console.log(getTotalPrice(groceries3));
+
+        // Where's Waldo?
+
+        // Return the coordinates([row, col]) of the element that differs from the rest.
+        //     Examples
+
+        // whereIsWaldo([
+        //     ["A", "A", "A"],
+        //     ["A", "A", "A"],
+        //     ["A", "B", "A"]
+        // ]) ➞[3, 2]
+
+        // whereIsWaldo([
+        //     ["c", "c", "c", "c"],
+        //     ["c", "c", "c", "d"]
+        // ]) ➞[2, 4]
+
+        // whereIsWaldo([
+        //     ["O", "O", "O", "O"],
+        //     ["O", "O", "O", "O"],
+        //     ["O", "O", "O", "O"],
+        //     ["O", "O", "O", "O"],
+        //     ["P", "O", "O", "O"],
+        //     ["O", "O", "O", "O"]
+        // ]) ➞[5, 1]
+
+        // Notes
+
+        // Rows and columns are 1 - indexed(not zero - indexed).
+
+        //this was the function that I created and struggled to solve problem with
+        // const whereIsWaldo = (arr) => {
+        //     let commonLetter = '';
+        //     return arr.map((list, index) => {
+        //         let commonLetter;
+        //         list.filter((letter, index2) => {
+        //             if (list[index2] === list[index2 + 2]) {
+        //                 commonLetter = list[index2];
+        //             } else {
+        //                 commonLetter = list[index2 + 1];
+        //             }
+        //             if (letter !== commonLetter) {
+        //                 // return [index + 1, list.indexOf(letter) + 1];
+        //             }
+        //         })
+        //     });
+        // }
+
+        const whereIsWaldo = (arr) => {
+                let result;
+                arr.filter((el, i) => el.find((a, index) =>
+                    el.indexOf(a) == el.lastIndexOf(a) ? result = [i + 1, index + 1] : ""))
+                return result
+            }
+        
+
+        console.log(whereIsWaldo([
+            ["c", "c", "c", "c"],
+            ["c", "c", "c", "d"]
+        ]));
+        console.log(whereIsWaldo([
+            ["O", "O", "O", "O"],
+            ["O", "O", "O", "O"],
+            ["O", "O", "O", "O"],
+            ["O", "O", "O", "O"],
+            ["P", "O", "O", "O"],
+            ["O", "O", "O", "O"]
+        ]));
+
+
+//         Make a Circle with OOP
+
+         // Your task is to create a Circle constructor that creates a circle with a radius provided by an argument.The circles constructed must have two getters getArea()(PIr ^ 2) and getPerimeter()(2PI * r) which give both respective areas and perimeter(circumference).
+
+        //             For help with this class, I have provided you with a Rectangle constructor which you can use as a base example.
+//                 Examples
+
+//             let circy = new Circle(11);
+//             circy.getArea();
+
+//             // Should return 380.132711084365
+
+//             let circy = new Circle(4.44);
+//             circy.getPerimeter();
+
+// Should return 27.897342763877365
+
+        class Circle {
+            constructor(radius) {
+                this.radius = radius,
+                this.getArea = () => {
+                    return parseFloat((Math.PI * (this.radius ** 2)).toFixed(2));
+                },
+                this.getPerimeter = () => {
+                    return parseFloat((2 * Math.PI * this.radius).toFixed(2))
+                }
+            }
+        }
+
+        let circy = new Circle(11);
+        console.log(circy.getArea());
+
+        let circy2 = new Circle(4.44);
+        console.log(circy2.getPerimeter());
+
+        class Console {
+            constructor() {
+                this.store = []
+                this.log = (param) => {
+                    const newEntry = param.toString();
+                    this.store.push(newEntry);
+                    return newEntry;
+                }
+                this.history = (lowEnd, highEnd) => {
+                    // return this.store !== [] ? this.store.join('\n') : '';
+                    if (typeof lowEnd == 'number' || typeof highEnd == 'number' ) {
+                        return this.store.slice(lowEnd - 1, highEnd).join('\n');
+                    } else {
+                        return this.store.join('\n');
+                    }
+                }
+                this.clearHistory = () => {
+                    this.store = [];
+                    return true
+                }
+            }
+        }
+
+        const myNewConsole = new Console();
+        console.log(myNewConsole.log('ooooooh, ah'));
+        console.log(myNewConsole.log('helllooo'));
+        console.log(myNewConsole.log(() => true));
+        console.log(myNewConsole.history());
+        console.log(myNewConsole.log(456));
+        console.log(myNewConsole.history(1,2));
+        console.log(myNewConsole.clearHistory());
+        console.log(myNewConsole.history());
 </script>
 </body>
 </html>
