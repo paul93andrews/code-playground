@@ -1192,6 +1192,26 @@
         let circy2 = new Circle(4.44);
         console.log(circy2.getPerimeter());
 
+
+    // Write a Simple Console Object
+
+    // The objective of this challenge is to create a console Object.You should write three working functions inside to complete this challenge:
+
+    // Create a log function that takes user arguments and returns them as a string.
+    // Create a history function that takes an optional range as an argument.
+    // Create a clearHistory function to remove the history memory.
+
+    //     Examples
+
+    // myConsole.log([0, 1, 2, 3]) ➞ "[0,1,2,3]"
+
+    // myConsole.log("ok : ", function () { return "hello world !" }) ➞ "ok : function(){ return \"hello world !\"}"
+
+    // myConsole.history() ➞ "[0,1,2,3]\nok : function(){ return \"hello world !\"}''
+
+    // myConsole.clearHistory() ➞ true
+
+    // myConsole.history() ➞ ""
         class Console {
             constructor() {
                 this.store = []
@@ -1224,6 +1244,137 @@
         console.log(myNewConsole.history(1,2));
         console.log(myNewConsole.clearHistory());
         console.log(myNewConsole.history());
+
+
+        // Digitaldrome
+
+        //     In this challenge, you have to establish if the digits of a given number form a sequence(ascending or descending).
+
+        //     Given an integer n, implement a function that returns a string:
+
+        //     "Metadrome" if the digits of n form an ascending sequence without repeating digits;
+        //     "Plaindrome" if the digits of n form an ascending sequence with repeating digits;
+        //     "Katadrome" if the digits of n form a descending sequence without repeating digits;
+        //     "Nialpdrome" if the digits of n form a descending sequence with repeating digits;
+        //     "Repdrome" if n contains a single repeating digit;
+        //     "Nondrome" if none of the above conditions is true.
+
+        //         Examples
+
+        //     digitaldrome(1357) ➞ "Metadrome"
+        //     // Ascending sequence without repeating digits
+
+        //     digitaldrome(12344) ➞ "Plaindrome"
+        //     // Ascending sequence with repeating digits
+
+        //     digitaldrome(7531) ➞ "Katadrome"
+        //     // Descending sequence without repeating digits
+
+        //     digitaldrome(9874441) ➞ "Nialpdrome"
+        //     // Descending sequence with  repeating digits
+
+        //     digitaldrome(666) ➞ "Repdrome"
+        //     // There's only a single repeating digit
+
+        //     digitaldrome(1985) ➞ "Nondrome"
+        //     // This is not a sequence
+
+        //     Notes
+
+        //     Any given n will be a positive integer.
+
+        const digitalDrome = (num) => {
+            // return num
+            //     .toString()
+            //     .split('')
+            //     .filter((int, index) => {
+            //         console.log(int, index);
+            //     })
+            const numArray = num.toString().split('');
+            const diffArray = [];
+            numArray.map((int, index) => {
+                diffArray.push(numArray[index + 1] - int)
+            }).map(int)
+        }
+
+        const digitaldrome = n => {
+            n = String(n);
+            console.log(n.length, 'n.length value');
+            let set = new Set(n).size;
+            console.log(set, 'set value');
+            if (set === 1) return "Repdrome";
+            let sor = [...n].sort(),
+                a = [n === sor.join(""), n === sor.reverse().join("")],
+                b = set === n.length,
+                res = [a[0] && b, a[1] && b, a[0] && !b, a[1] && !b];
+                console.log(a, 'a value');
+                console.log(b, 'b value');
+                console.log(res, 'res value');
+            return ["Metadrome", "Katadrome", "Plaindrome", "Nialpdrome"]
+            [res.indexOf(true)] || "Nondrome";
+        }
+
+        console.log(digitaldrome(1357));
+
+        // IndexOf and LastIndexOf
+
+        //     Your task is to recreate two functions from String.object(indexOf() and lastIndexOf()).
+        //         str.indexOf(searchValue[, fromIndex])
+
+        //     This function will accept a string and regex as searched value, take a look at target string and return the first index if there is a match.
+
+        //     searchValue is a string or a regex object representing the value to be searched.
+        //     fromIndex is an optional parameter indicating the starting point(beginning from left) of your search.
+
+        //     If any value matches, return the first index found, else return -1.
+        //     str.lastIndexOf(searchValue[, fromIndex])
+
+        //     This function is the same as indexOf except it will return the last index if there is a match.
+
+        //     searchValue is a string or a regex object representing the value to be searched.
+        //     fromIndex is an optional parameter indicating the index of beginning of matched strings.
+
+        //     For example, with regex you can try to find all matches in the string but the lastIndexOf function must return the index of the character at the fromIndex parameter or lower.
+
+        //     If any value matches, return the last index found, else return -1.
+
+        const indexOf = (str, searchValue, fromIndex = 0) => {
+            if (fromIndex > str.length) {
+                return -1;
+            }
+            return str
+                .split('')
+                .map((letter, index) => {
+                    if (index >= fromIndex && (letter === searchValue || letter.match(searchValue))) {
+                        return index
+                    } else {
+                        return -1;
+                    }
+                })
+                .sort((a, b) => a - b)
+                // .find(indexValue => indexValue != -1 ? indexValue : -1)
+                .join(' ')
+                // .search(/[-1]/g);
+        }
+
+        const lastIndexOf = (str, searchValue, fromIndex = 0) => {
+            return str
+                .split('')
+                .slice(fromIndex)
+                .map((letter, index) => {
+                    if (index >= fromIndex && (letter === searchValue || letter.match(searchValue))) {
+                        return index;
+                    } else {
+                        return -1;
+                    }
+                })
+                .sort((a, b) => b - a)[0]
+        }
+
+        // console.log(indexOf('wood', 'o'));
+        // console.log(lastIndexOf('wood', 'o'));
+        console.log(indexOf('ohello', 'o', 4));
+        console.log(lastIndexOf('ohello', 'o'));
 </script>
 </body>
 </html>
