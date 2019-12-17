@@ -1375,6 +1375,71 @@
         // console.log(lastIndexOf('wood', 'o'));
         console.log(indexOf('ohello', 'o', 4));
         console.log(lastIndexOf('ohello', 'o'));
+
+        // Find the Missing Number
+
+        //     Create a function that takes an array of numbers between 1 and 10(excluding one number) and returns the missing number.
+        //         Examples
+
+        //     missingNum([1, 2, 3, 4, 6, 7, 8, 9, 10]) ➞ 5
+
+        //     missingNum([7, 2, 3, 6, 5, 9, 1, 4, 8]) ➞ 10
+
+        //     missingNum([10, 5, 1, 2, 4, 6, 8, 3, 9]) ➞ 7
+
+        //     Notes
+
+        //     The array of numbers will be unsorted(not in order).
+        //     Only one number will be missing.
+
+        const missingNum = (arr) => {
+            return arr
+                .sort((a,b) => a - b)
+                .filter((num, index, arr) => {
+                    if (arr[index + 1] - num !== 1) {
+                        return num;
+                    } else if (index === 0 && num != 1) {
+                        return 0;
+                    }
+                })[0] + 1
+        }
+
+        const testArr = [1, 2, 3, 5, 6, 7, 8, 9, 10];
+        const testArr2 = [10, 5, 1, 2, 4, 6, 8, 3, 9];
+        const testArr3 = [7, 2, 3, 6, 5, 9, 1, 4, 8];
+        const testArr4 = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+        // console.log(missingNum(testArr));
+        // console.log(missingNum(testArr2));
+        // console.log(missingNum(testArr3));
+        console.log(missingNum(testArr4));
+
+//         Write a function that, given a date(in the format MM / DD / YYYY), returns the day of the week as a string.Each day name must be one of the following strings: "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", or "Saturday".
+
+//             To illustrate, the day of the week for "12/07/2016" is "Wednesday".
+//                 Examples
+
+// getDay("12/07/2016") ➞ "Wednesday"
+
+//             getDay("09/04/2016") ➞ "Sunday"
+
+//             getDay("12/08/2011") ➞ "Thursday"
+
+        // const getDay = (str) => {
+        //     const [month, day, year] = str.split("/");
+        //     const indexWeek = new Date(year, month - 1, day).getDay();
+        //     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+        //     return daysOfWeek.find((date, index) => {
+        //         if (index === indexWeek) {
+        //             return date;
+        //         }
+        //     });
+        // }
+
+        const getDay = day => new Date(day).toLocaleString('en-us', { weekday: 'long' });
+
+        console.log(getDay("12/07/2016"));
+        console.log(getDay("12/14/2019"));
 </script>
 </body>
 </html>
