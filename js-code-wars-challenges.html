@@ -1440,6 +1440,88 @@
 
         console.log(getDay("12/07/2016"));
         console.log(getDay("12/14/2019"));
+
+        // Reverse Coding Challenge #6
+
+        //     This is a reverse coding challenge.Normally you're given explicit directions with how to create a function. Here, you must generate your own function to satisfy the relationship between the inputs and outputs.
+
+        //     Your task is to create a function that, when fed the inputs below, produces the sample outputs shown.
+        //         Examples
+
+        //     mysteryFunc(152) ➞ 10
+
+        //     mysteryFunc(832) ➞ 48
+
+        //     mysteryFunc(19) ➞ 9
+
+        //     mysteryFunc(133) ➞ 9
+
+        const mysteryFunc = (num) => {
+            return num
+                .toString()
+                .split('')
+                .reverse()
+                .reduce((a, b, index, arr) => {
+                    return a * b;
+                });
+        }
+
+        console.log(mysteryFunc(152));
+        console.log(mysteryFunc(832));
+
+        // Lowercase and Uppercase Map
+
+        //     Write a function that creates an object with each(key, value) pair being the(lower case, upper case) versions of a letter, respectively.
+        //         Examples
+
+        //     mapping(["p", "s"]) ➞ { "p": "P", "s": "S" }
+
+        //     mapping(["a", "b", "c"]) ➞ { "a": "A", "b": "B", "c": "C" }
+
+        //     mapping(["a", "v", "y", "z"]) ➞ { "a": "A", "v": "V", "y": "Y", "z": "Z" }
+
+        const mapping = (arr) => {
+            const obj = {}
+            arr.map(letter => {
+                if (!obj[letter]) {
+                    obj[letter] = letter.toUpperCase();
+                }
+            });
+            return obj;
+        }
+
+        console.log(mapping(["p", "s", "s"]));
+        console.log(mapping(["a", "b", "c", "a"]));
+
+        // One Button Messaging Device
+
+        // Imagine a messaging device with only one button.For the letter A, you press the button one time, for E, you press it five times, for G, it's pressed seven times, etc, etc.
+
+        // Write a function that takes a string(the message) and returns the total number of times the button is pressed.
+        //     Examples
+
+        // howManyTimes("abde") ➞ 12
+
+        // howManyTimes("azy") ➞ 52
+
+        // howManyTimes("qudusayo") ➞ 123
+
+        // Notes
+
+        // Ignore spaces.
+
+        const howManyTimes = (str) => {
+            const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+            return [...str]
+                .map(letter => {
+                    return (alphabet.indexOf(letter) + 1);
+                })
+                .reduce((a,b) => a + b)
+        }
+
+        console.log(howManyTimes("abde"));
+        console.log(howManyTimes("azy"));
+        console.log(howManyTimes("qudusayo"));
 </script>
 </body>
 </html>
