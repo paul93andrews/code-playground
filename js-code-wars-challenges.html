@@ -1522,6 +1522,62 @@
         console.log(howManyTimes("abde"));
         console.log(howManyTimes("azy"));
         console.log(howManyTimes("qudusayo"));
+
+        // Online Shopping
+
+        //     Create a function that determines whether a shopping order is eligible for free shipping.An order is eligible for free shipping if the total cost of items purchased exceeds $50.00.
+        //         Examples
+
+        //     freeShipping({ "Shampoo": 5.99, "Rubber Ducks": 15.99 }) ➞ false
+
+        //     freeShipping({ "Flatscreen TV": 399.99 }) ➞ true
+
+        //     freeShipping({ "Monopoly": 11.99, "Secret Hitler": 35.99, "Bananagrams": 13.99 }) ➞ true
+
+        //     Notes
+
+        //     Ignore tax or additional fees when calculating the total order cost.
+
+        const freeShipping = (obj) => {
+            const sum =  Object.values(obj).reduce((a,b) => a + b);
+            return sum >= 50.00 ? true : false;
+        }
+
+        console.log(freeShipping({ "Shampoo": 5.99, "Rubber Ducks": 15.99 }));
+        console.log(freeShipping({ "Flatscreen TV": 399.99 }));
+
+        // Is Johnny Making Progress ?
+
+        //         To train for an upcoming marathon, Johnny goes on one long - distance run each Saturday.He wants to track how often the number of miles he runs this Saturday exceeds the number of miles run the previous Saturday.This is called a progress day.
+
+        //     Create a function that takes in an array of miles run every Saturday and returns Johnny's total number of progress days.
+        //     Examples
+
+        //     progressDays([3, 4, 1, 2]) ➞ 2
+        //     // There are two progress days, (3->4) and (1->2)
+
+        //     progressDays([10, 11, 12, 9, 10]) ➞ 3
+
+        //     progressDays([6, 5, 4, 3, 2, 9]) ➞ 1
+
+        //     progressDays([9, 9]) ➞ 0
+
+        //     Notes
+
+        //     Running the same number of miles as last week does not count as a progress day.
+
+        const progressDays = (arr) => {
+            return arr.filter((mile, index, arr) => {
+                if (arr[index + 1] > mile) {
+                    return 1;
+                }
+            }).length
+        }
+        
+        console.log(progressDays([3, 4, 1, 2]));
+        console.log(progressDays([10, 11, 12, 9, 10]));
+        console.log(progressDays([6, 5, 4, 3, 2, 9]));
+        console.log(progressDays([9, 9]));
 </script>
 </body>
 </html>
