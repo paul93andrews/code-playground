@@ -1578,6 +1578,34 @@
         console.log(progressDays([10, 11, 12, 9, 10]));
         console.log(progressDays([6, 5, 4, 3, 2, 9]));
         console.log(progressDays([9, 9]));
+
+        // Recursion: Count Vowels
+
+        // Write a function that recursively returns the number of vowels in a string.
+        // Examples
+
+        // countVowels("apple") ➞ 2
+
+        // countVowels("cheesecake") ➞ 5
+
+        // countVowels("bbb") ➞ 0
+
+        // countVowels("") ➞ 0
+
+        const countVowels = (str, vowels = 0, index = 0) => {
+            const vowelCheck = /[aeiou]+/g;
+            if (index === str.length) {
+                return vowels;
+            } else if (vowelCheck.test(str[index])) {
+                return countVowels(str, vowels + 1, index + 1);
+            } else {
+                return countVowels(str, vowels, index + 1);
+            }
+        }
+
+        console.log(countVowels('apple'));
+        console.log(countVowels('cheesecake'));
+
 </script>
 </body>
 </html>
