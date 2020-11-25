@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Exercises from Eloquent JavaScript are below -->
+    <script>
+       triangleLoop = () => {
+           let display = ""
+           for (let i = 0; i < 7; i++) {
+               display = display + '#';
+               console.log(display);
+           }
+       }
+       triangleLoop();
+
+       fizzBuzz = () => {
+           for (let i = 1; i <= 100; i++) {
+               if (i % 3 == 0 && i % 5 == 0) {
+                   console.log('FizzBuzz');
+               }
+               else if (i % 3 == 0) {
+                   console.log('Fizz');
+               }
+               else if (i % 5 == 0) {
+                   console.log('Buzz');
+               }
+               else {
+                   console.log(i);
+               }
+           }
+       }
+
+       fizzBuzz();
+
+       chessGrid = () => {
+        //need to add to string, what gets added to string depends on the number that is being looped through
+        let board = "";
+        const evenRow = "# # # # ";
+        const oddRow = " # # # #";
+
+           for (let i = 0; i < 8; i++) {
+
+               if (i % 2 == 0) board += evenRow + '\n';
+               else board += oddRow + '\n';
+           }
+
+           console.log(board);
+       }
+
+       chessGrid();
+
+
+//FUNCTIONS CHAPTER EXERCISES
+       //Minimum: The previous chapter introduced the standard function Math.min that returns its smallest argument.We can build something like that now.Write a function min that takes two arguments and returns their minimum.
+       getMinNumber = (first, second) => {
+            return Math.min(first, second);
+       }
+
+       console.log(getMinNumber(8, 14));
+       console.log(getMinNumber(13, 4));
+
+    //    Recursion:
+    //     We’ve seen that % (the remainder operator) can be used to test whether a number is even or odd by using % 2 to see whether it’s divisible by two.Here’s another way to define whether a positive whole number is even or odd:
+
+    //     Zero is even.
+
+    //     One is odd.
+
+    //     For any other number N, its evenness is the same as N - 2.
+
+    //     Define a recursive function isEven corresponding to this description.The function should accept a single parameter(a positive, whole number) and return a Boolean.
+
+    //     Test it on 50 and 75. See how it behaves on - 1. Why ? Can you think of a way to fix this ?
+
+    isEven = (number) => {
+        if(number == 0) {
+            return true
+        }
+        else if (number == 1) {
+            return false
+        }
+        else if (number < 0) {
+            return isEven(number + 2);
+        }
+        else {
+            return isEven(number - 2);
+        }
+    }
+
+    console.log(isEven(-2));
+
+    // Bean counting:
+    //     You can get the Nth character, or letter, from a string by writing "string"[N].The returned value will be a string containing only one character(for example, "b").The first character has position 0, which causes the last one to be found at position string.length - 1. In other words, a two - character string has length 2, and its characters have positions 0 and 1.
+
+    //     Write a function countBs that takes a string as its only argument and returns a number that indicates how many uppercase “B” characters there are in the string.
+
+    //         Next, write a function called countChar that behaves like countBs, except it takes a second argument that indicates the character that is to be counted(rather than counting only uppercase “B” characters).Rewrite countBs to make use of this new function.
+
+    countB = (string) => {
+        let countString = 0;
+        // countString = string['B'];
+        for (let i = 0; i < string.length; i++) {
+            if (string[i] == 'B') {
+                countString++;
+            }
+        }
+        return countString;
+    }
+
+    console.log(countB('Bring it on BAbY'));
+
+    // The sum of a range:
+    //     The introduction of this book alluded to the following as a nice way to compute the sum of a range of numbers:
+
+    //     console.log(sum(range(1, 10)));
+    //     Write a range function that takes two arguments, start and end, and returns an array containing all the numbers from start up to(and including) end.
+
+    //         Next, write a sum function that takes an array of numbers and returns the sum of these numbers.Run the example program and see whether it does indeed return 55.
+
+    //     As a bonus assignment, modify your range function to take an optional third argument that indicates the “step” value used when building the array.If no step is given, the elements go up by increments of one, corresponding to the old behavior.The function call range(1, 10, 2) should return [1, 3, 5, 7, 9].Make sure it also works with negative step values so that range(5, 2, -1) produces[5, 4, 3, 2].
+
+    //         // Your code here.
+
+    //         console.log(range(1, 10));
+    //     // → [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    //     console.log(range(5, 2, -1));
+    //     // → [5, 4, 3, 2]
+    //     console.log(sum(range(1, 10)));
+// → 55
+
+    const rangeFunction = (param1, param2, step) => {
+        const array = [];
+        if (param1 > param2) {
+            for (i = param1; i >= param2; i = i - step) {
+                array.push(i);
+            }
+        } else if (param1 < param2) {
+            for (i = param1; i <= param2; i = i + step) {
+                array.push(i);
+            }
+        }
+        return array;
+    }
+
+    const sumFunction = (range) => {
+        return range.reduce((a, b) => a + b, 0);
+    }
+
+    console.log(rangeFunction(5, 2, 1)); //no need for negative step values, the for loop will ajust for it
+    console.log(sumFunction(rangeFunction(1, 10, 2)));
+
+    // Reversing an array:
+    //     Arrays have a reverse method that changes the array by inverting the order in which its elements appear.For this exercise, write two functions, reverseArray and reverseArrayInPlace.The first, reverseArray, takes an array as argument and produces a new array that has the same elements in the inverse order.The second, reverseArrayInPlace, does what the reverse method does: it modifies the array given as argument by reversing its elements.Neither may use the standard reverse method.
+
+    //     Thinking back to the notes about side effects and pure functions in the previous chapter, which variant do you expect to be useful in more situations ? Which one runs faster ?
+
+    //         // Your code here.
+
+    //         console.log(reverseArray(["A", "B", "C"]));
+    //     // → ["C", "B", "A"];
+    //     let arrayValue = [1, 2, 3, 4, 5];
+    //     reverseArrayInPlace(arrayValue);
+    //     console.log(arrayValue);
+// → [5, 4, 3, 2, 1]
+    let arrayValue = [1, 2, 3, 4, 5];
+
+    const reverseArray = (originalArray) => {
+        let newArray = [];
+        newArray = [...originalArray];
+        newArray.reverse();
+        return newArray;
+    }
+
+    const reverseArrayInPlace = (originalArray) => {
+        originalArray.reverse();
+        return originalArray;
+    }
+
+    console.log(reverseArray(arrayValue));
+    console.log(arrayValue);
+    console.log(reverseArrayInPlace(arrayValue));
+    console.log(arrayValue);
+
+    let secondArrayValue = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+    const secondReverseArray = (originalArray) => {
+        let secondNewArray = [];
+        for (let number of originalArray) {
+            secondNewArray.unshift(number);
+        }
+        return secondNewArray;
+    }
+
+    //such a cool trick in the function here below! It's swapping the first + i and last + i elements in the array to create a swap in the array. It's very cool to know and remember that you can write over values any array very easily, and you can overwrite them with any data type
+    const secondReverseArrayInPlace = (originalArray) => {
+        const length = originalArray.length;
+        const half = Math.floor(length / 2);
+        for (i = 0; i < half; i++) {
+            temp = originalArray[i];
+            originalArray[i] = originalArray[length - 1 - i];
+            originalArray[length - 1 - i] = temp;
+        }
+        // originalArray.slice(0, half);
+        return originalArray;
+    }
+
+    console.log(secondReverseArray(secondArrayValue));
+    console.log(secondArrayValue);
+    console.log(secondReverseArrayInPlace(secondArrayValue));
+
+    const playArray = [1, 2, 3, 4];
+    console.log(playArray);
+
+
+    // A list:
+    //     Objects, as generic blobs of values, can be used to build all sorts of data structures.A common data structure is the list(not to be confused with array).A list is a nested set of objects, with the first object holding a reference to the second, the second to the third, and so on.
+
+    //     let list = {
+    //         value: 1,
+    //         rest: {
+    //             value: 2,
+    //             rest: {
+    //                 value: 3,
+    //                 rest: null
+    //             }
+    //         }
+    //     };
+    //     The resulting objects form a chain, like this:
+
+    //     A linked list
+    //     A nice thing about lists is that they can share parts of their structure.For example, if I create two new values { value: 0, rest: list } and { value: -1, rest: list } (with list referring to the binding defined earlier), they are both independent lists, but they share the structure that makes up their last three elements.The original list is also still a valid three - element list.
+
+    //     Write a function arrayToList that builds up a list structure like the one shown when given[1, 2, 3] as argument.Also write a listToArray function that produces an array from a list.Then add a helper function prepend, which takes an element and a list and creates a new list that adds the element to the front of the input list, and nth, which takes a list and a number and returns the element at the given position in the list(with zero referring to the first element) or undefined when there is no such element.
+
+    //     If you haven’t already, also write a recursive version of nth.
+
+    //         // Your code here.
+
+    //         console.log(arrayToList([10, 20]));
+    //     // → {value: 10, rest: {value: 20, rest: null}}
+    //     console.log(listToArray(arrayToList([10, 20, 30])));
+    //     // → [10, 20, 30]
+    //     console.log(prepend(10, prepend(20, null)));
+    //     // → {value: 10, rest: {value: 20, rest: null}}
+    //     console.log(nth(arrayToList([10, 20, 30]), 1));
+// → 20
+
+        const arrayToList = (array) => {
+            //very cool transforming an array into an object with nested lists on nested lists
+            //we take the array, and starting from the last property within it, we add that value as the value in a list to be added to the object. The object added to the myList object has a rest property which is an object of the previous list data taken from the other array property values.
+            let myList = {};
+            for (i = array.length - 1; i >= 0; i--)  {
+                //once we begin the mapping of the array properties to the object as a list, we ensure that the rest property is null as it isn't referring to any more nested lists, empty objects or not
+                if (i == array.length - 1) {
+                    temp = null;
+                    myList = { value: array[i], rest: temp };
+                    temp = myList
+                }
+                else {
+                    temp = myList;
+                    myList = {value: array[i], rest: temp};
+                    temp = myList;
+                }
+            }
+            return myList;
+        }
+
+        console.log(arrayToList([1, 2, 3]));
+
+        const listToArray = (list) => {
+            const array = [];
+            //very cool here too. We loop through our nested list object, with the first iteration just taking the value at the front of the object. The next iteration dives deeper into our nested list, going into the rest property object and taking the value from there. The loop ends when we get to our final nested object whose rest property is null. Each of the value properties are pushed into the array
+            for (let node = list; node; node = node.rest) {
+                array.push(node.value);
+            }
+            return array;
+        }
+
+        console.log(listToArray(arrayToList([1, 2, 3, 4, 5, 6, 7])));
+
+
+        const prepend = (element, list) => {
+            let newList = {}
+            //interesting here too, we are taking the value passed in and putting it at the front of a nested object. The other nested objects to follow are a parameter passed in and they are nested within the front objects rest property.
+            newList = {value: element, rest: list}
+
+            return newList;
+        }
+
+        console.log(prepend(10, prepend(20, arrayToList([1, 2, 3]))));
+
+
+        const nth = (list, number) => {
+            //fucking wicked JS here...we are using if loops and recursion to find the element passed in at the nested object within the broader object. The first list is the front of the object and if the number == 0 then we take the value there, meaning the user passed in a parameter to get the most front end value. If they pass a number higher than one, we dig deeper into the object's nested lists as we run the recursive function but this time with list.rest (one of the nested objects) and we decrease the number, bringing us closer to number == 0 which tells the function to grab that object's value property. If the value property hits null before number == 0, then we return undefined as the function has gone as nested as possible and there is no list value as deeply nested as the parameter inputted.
+            if (!list)
+                return undefined;
+            else if (number == 0)
+                return list.value;
+            else
+                return nth(list.rest, number - 1);
+        }
+
+        console.log(nth(arrayToList([1, 2, 3]), 1));
+
+        // Deep comparison:
+        //     The == operator compares objects by identity.But sometimes you’d prefer to compare the values of their actual properties.
+
+        //     Write a function deepEqual that takes two values and returns true only if they are the same value or are objects with the same properties, where the values of the properties are equal when compared with a recursive call to deepEqual.
+
+        //     To find out whether values should be compared directly(use the === operator for that) or have their properties compared, you can use the typeof operator.If it produces "object" for both values, you should do a deep comparison.But you have to take one silly exception into account: because of a historical accident, typeof null also produces "object".
+
+        //     The Object.keys function will be useful when you need to go over the properties of objects to compare them.
+
+            // Your code here.
+
+//             let obj = { here: { is: "an" }, object: 2 };
+//             console.log(deepEqual(obj, obj));
+//             // → true
+//             console.log(deepEqual(obj, { here: 1, object: 2 }));
+//             // → false
+//             console.log(deepEqual(obj, { here: { is: "an" }, object: 2 }));
+// // → true
+
+        const deepEqual = (param1, param2) => {
+            //first condition the paramters must pass on their evaluation is whether their values are different, if they are it fails and return false
+            if (param1 != param2) {
+                return false;
+            }
+            //second is whether their data types are both objects and not equal to null. If it passes that evaluation it must go through several other conditional statements
+            else if ((typeof param1 == 'object' && param1 != null) && (typeof param2 == 'object' && param2 != null)) {
+                //here the functions checks the lengths of the parameter's properties, if they're the same they continue, if not then their properties are not equal and so the function returns false
+                if (Object.keys(param1).length != Object.keys(param2).length) {
+                    return false;
+                }
+                //they have the same number of properties but are they equal in type and value length? This for loop goes through each of the properties in param1 to check if param2 not only has them, but if the same properties in param2 have the same data type and value lengths. Uses recursion to do so.
+                for (let prop in param1) {
+                    if (param2.hasOwnProperty(prop)) {
+                        //if they have the same properties but they're either not of the same data type or value length, then they're not deeply equal
+                        if (! deepEqual(param1[prop], param2[prop])) {
+                            return false;
+                        }
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                //it passes all conditions to be identical objects and so they're are deeply equal
+                return true;
+            }
+            else {
+                return true;
+            }
+        }
+        let obj = { here: { is: "an" }, object: 2 };
+
+        console.log(deepEqual(obj, null));
+        console.log(deepEqual(obj, { here: { is: "an" }, object: 2 }));
+        console.log(deepEqual(3, {hello:'hello', working: null}));
+        console.log(deepEqual('true', 'true'));
+
+//         Flattening
+//             Use the reduce method in combination with the concat method to “flatten” an array of arrays into a single array that has all the elements of the original arrays.
+
+//             let arrays = [[1, 2, 3], [4, 5], [6]];
+// // Your code here.
+// // → [1, 2, 3, 4, 5, 6]
+        let arrays = [[1, 2, 3], [4, 5], [6]];
+        createOneArray = (array) => {
+            const newArray = [];
+            newArray.push(...array.reduce((a, b) => a.concat(b)));
+            return newArray;
+        }
+
+        console.log(createOneArray(arrays));
+
+
+        // Your own loop
+        //     Write a higher - order function loop that provides something like a for loop statement.It takes a value, a test function, an update function, and a body function.Each iteration, it first runs the test function on the current loop value and stops if that returns false.Then it calls the body function, giving it the current value.Finally, it calls the update function to create a new value and starts from the beginning.
+
+        //     When defining the function, you can use a regular loop to do the actual looping.
+
+        //         // Your code here.
+
+        //         loop(3, n => n > 0, n => n - 1, console.log);
+        // → 3
+        // → 2
+        // → 1
+
+        myLoop = (value, testFunction, updateFunction, bodyFunction) => {
+            for (let start = value; testFunction(start); start = updateFunction(start)) {
+                bodyFunction(start);
+            }
+        }
+
+        myLoop(3, n => n > 0, n => n - 1, console.log);
+
+        //alternatively
+
+        loop = (value, test, update, execute) => {
+                if (test(value)) {
+                    execute(value);
+                    return loop(update(value), test, update, execute);
+                }
+            }
+
+        loop(3, n => n > 0, n => n - 1, console.log);
+// → 3
+// → 2
+// → 1
+        // Everything
+        //     Analogous to the some method, arrays also have an every method.This one returns true when the given function returns true for every element in the array.In a way, some is a version of the || operator that acts on arrays, and every is like the && operator.
+
+        //     Implement every as a function that takes an array and a predicate function as parameters.Write two versions, one using a loop and one using the some method.
+
+        //     function every(array, test) {
+        //         // Your code here.
+        //     }
+
+        //     console.log(every([1, 3, 5], n => n < 10));
+        //     // → true
+        //     console.log(every([2, 4, 16], n => n < 10));
+        //     // → false
+        //     console.log(every([], n => n < 10));
+            // → true
+
+        every = (array, testFunction) => {
+            for (let item of array) {
+                if (testFunction(item) == false) {
+                    return false;
+                    break;
+                }
+                else if (array.indexOf(item) == array.length - 1) { 
+                    return true;
+                }
+            }
+        }
+
+        console.log(every([2, 4, 16], n => n < 10));
+
+        everySome = (array, testFunction) => {
+            //some fun JS going on here. With some methods on arrays you check for the first element in the array that satisfies the callback condition passed in. We're using the ! operator to inverse the returns and therefore what we're checking for, allowing us to loop through the entire array. This first ! operator inverses the return we get from the some method, true or false.
+            return !array.some((element) => {
+                //now the method will return true or false depending on whether the condition is met. We inverse the return from the some() method, in effect inversing what it is looking for. In this case, it's looking for items in the array < 10, but with the ! below, it inverses any return it passes to the function, in effect checking for elements in the array > 10 instead.
+                return !testFunction(element);
+            });
+            //because it's now looking for elements in the array > 10 it's able to check the entire array for the original condition, give us a false boolean because the inverse condition isn't met, but then inverse that to restore the results of the original condition we passed in. Clever trick to use the some() method to loop through an entire array
+        }
+
+        console.log(everySome([2, 4, 29], n => n < 10));
+
+    </script>
+</body>
+
+</html>

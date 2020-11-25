@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced JS Exercises</title>
+</head>
+
+<body>
+    <h1>Advanced JS Exercises from UDemy Course</h1>
+    <h2>Check the console!</h2>
+
+    <script>
+        //Google Question
+            //Given an array = [2,5,1,2,3,5,1,2,4]:
+            //It should return 2
+
+            //Given an array = [2,1,1,2,3,5,1,2,4]:
+            //It should return 1
+
+            //Given an array = [2,3,4,5]:
+            //It should return undefined
+
+            //Bonus... What if we had this:
+            // [2,5,5,2,3,5,1,2,4]
+            // return 5 because the pairs are before 2,2
+        
+        const firstTestArray = [2, 5, 1, 2, 3, 5, 1, 2, 4];
+        const secondTestArray = [2, 1, 1, 2, 3, 5, 1, 2, 4];
+        const thirdTestArray = [2, 3, 4, 5];
+        const fourthTestArray = [2, 5, 5, 2, 3, 5, 1, 2, 4];
+
+        const returnFirstRecurringCharacter = (array) => {
+            const recurringItemsObject = {};
+            for(let i = 0; i < array.length; i++) {
+                if (!recurringItemsObject[array[i]]) {
+                    recurringItemsObject[array[i]] = 1;
+                } else {
+                    return array[i];
+                }
+            }
+        }
+
+        console.log(returnFirstRecurringCharacter(firstTestArray));
+        console.log(returnFirstRecurringCharacter(secondTestArray));
+        console.log(returnFirstRecurringCharacter(thirdTestArray));            console.log(returnFirstRecurringCharacter(fourthTestArray));
+    </script>
+</body>
+
+</html>
